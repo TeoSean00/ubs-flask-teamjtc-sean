@@ -74,9 +74,9 @@ def prioritisation_function(passengers, cut_off_time):
 
 
 def execute(id, prioritisation_function, passenger_data, cut_off_time):
-  # print('id', id)
-  # print('cut_off_time', cut_off_time)
-  # print(passenger_data)
+  print('id', id)
+  print('cut_off_time', cut_off_time)
+  print('passengerdata', passenger_data)
 
   totalNumberOfRequests = 0
   passengers = []
