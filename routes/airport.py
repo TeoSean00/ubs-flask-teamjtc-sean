@@ -49,19 +49,15 @@ def solve_airport_final(in_str_ls: List[str]) -> List[str]:
 def prioritisation_function(passengers, cut_off_time):
     # return sorted array of passenger instances
     passengerList = []
-    # timeElpased = 0
     
     for passenger in passengers:
       currentTime = passenger.askTimeToDeparture()
-      # timeElpased += 1
-      # if timeElpased < cut_off_time and timeElpased < currentTime:
       if currentTime >= cut_off_time:
-        if not passengerList:
+        if len(passengerList) == 0:
           passengerList.append(passenger)
         else:
           for currentPassenger in passengerList:
             if currentTime < currentPassenger.askTimeToDeparture():
-              # timeElpased += 1
               passengerList.insert(passengerList.index(currentPassenger), passenger)
               break
 
@@ -69,7 +65,9 @@ def prioritisation_function(passengers, cut_off_time):
 
 
 def execute(id, prioritisation_function, passenger_data, cut_off_time):
-  print(id, passenger_data, cut_off_time)
+  print('id', id)
+  print('cut_off_time', cut_off_time)
+  print(passenger_data)
 
   totalNumberOfRequests = 0
   passengers = []

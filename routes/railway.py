@@ -47,12 +47,6 @@ def solve_railway_final(in_str_ls: List[str]) -> List[str]:
     return result
 
 
-print(solve_railway_final([
-    "5, 3, 2, 1, 4",
-    "3, 3, 4, 1, 2",
-    "11, 1, 2"
-]))
-
 if __name__ == '__main__':
     solve_railway_final(
         [
