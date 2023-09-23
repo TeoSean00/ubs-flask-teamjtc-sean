@@ -7,8 +7,15 @@ from flask import request
 from routes import app
 
 logger = logging.getLogger(__name__)
-        
+
+
 @app.route('/railway-builder', methods=['POST'])
+def solve_railway():
+    res_json = request.get_json()
+    sol = solve_railway_final(res_json)
+    return json.dumps(sol)
+
+
 def solve_railway_final(in_str_ls: List[str]) -> List[str]:
     '''
     // Input JSON:
@@ -34,22 +41,23 @@ def solve_railway_final(in_str_ls: List[str]) -> List[str]:
         for piece in pieces:
             for i in range(piece, length + 1):
                 dp[i] += dp[i - piece]
-        
+
         result.append(dp[length])
-    
+
     return result
 
+
 print(solve_railway_final([
-  "5, 3, 2, 1, 4",
-  "3, 3, 4, 1, 2",
-  "11, 1, 2"
+    "5, 3, 2, 1, 4",
+    "3, 3, 4, 1, 2",
+    "11, 1, 2"
 ]))
 
 if __name__ == '__main__':
     solve_railway_final(
         [
-        "5, 3, 2, 1, 4",
-        "3, 3, 4, 1, 2",
-        "11, 1, 2"
+            "5, 3, 2, 1, 4",
+            "3, 3, 4, 1, 2",
+            "11, 1, 2"
         ]
     )
