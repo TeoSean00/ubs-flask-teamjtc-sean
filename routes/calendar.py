@@ -21,13 +21,10 @@ def calendar_solve():
   return response
 
 def calculate_calendar(lesson_requests: List[str]) -> List[str]:
-  # Create a table to store the maximum earnings for each day
   dp_table = {day: 0 for day in ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]}
 
-  # Create a table to track the selected lesson requests
   selected_lessons = {day: [] for day in ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]}
 
-  # Iterate through lesson requests and populate the DP table
   for request in lesson_requests:
       duration = request["duration"]
       available_days = request["availableDays"]

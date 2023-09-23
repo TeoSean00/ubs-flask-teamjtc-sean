@@ -9,3 +9,4 @@ from routes import greedy
 from routes import railway
 from routes import airport
 from routes import calendar
+from routes import digital_colony
