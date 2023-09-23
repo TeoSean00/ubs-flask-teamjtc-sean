@@ -56,18 +56,28 @@ def prioritisation_function(passengers, cut_off_time):
         if len(passengerList) == 0:
           passengerList.append(passenger)
         else:
-          for currentPassenger in passengerList:
-            if currentTime < currentPassenger.askTimeToDeparture():
-              passengerList.insert(passengerList.index(currentPassenger), passenger)
-              break
+          if currentTime >= passengerList[-1].askTimeToDeparture():
+            passengerList.append(passenger)
+          else:
+            inserted = False
 
+            for idx, currentPassenger in enumerate(passengerList):
+              if not inserted:
+                if currentTime <= currentPassenger.askTimeToDeparture():
+                  passengerList.insert(passengerList.index(currentPassenger), passenger)
+                  inserted = True
+
+            if not inserted:
+              passengerList.append(passenger)
+                
+    print(len(passengerList))
     return passengerList
 
 
 def execute(id, prioritisation_function, passenger_data, cut_off_time):
-  print('id', id)
-  print('cut_off_time', cut_off_time)
-  print(passenger_data)
+  # print('id', id)
+  # print('cut_off_time', cut_off_time)
+  # print(passenger_data)
 
   totalNumberOfRequests = 0
   passengers = []
@@ -82,17 +92,12 @@ def execute(id, prioritisation_function, passenger_data, cut_off_time):
   # Sum totalNumberOfRequests across all passengers
   for i in range(len(passengers)):
     totalNumberOfRequests += passengers[i].getNumberOfRequests()
-  print("totalNumberOfRequests: " + str(totalNumberOfRequests))
 
   # Print sequence of sorted departure times
-  print("Sequence of prioritised departure times:")
   prioritised_filtered_list = []
 
   for i in range(len(prioritised_and_filtered_passengers)):
-    print(prioritised_and_filtered_passengers[i].departureTime, end=" ")
     prioritised_filtered_list.append(prioritised_and_filtered_passengers[i].departureTime)
-
-  print("\n")
 
   return {
     "id": id,
