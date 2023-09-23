@@ -98,5 +98,4 @@ def execute(id, prioritisation_function, passenger_data, cut_off_time):
     "id": id,
     "sortedDepartureTimes": prioritised_filtered_list,
     "numberOfRequests": totalNumberOfRequests
-
   }
