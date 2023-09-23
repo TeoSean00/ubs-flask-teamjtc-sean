@@ -63,14 +63,13 @@ def prioritisation_function(passengers, cut_off_time):
 
             for idx, currentPassenger in enumerate(passengerList):
               if not inserted:
-                if currentTime <= currentPassenger.askTimeToDeparture():
+                if currentTime < currentPassenger.askTimeToDeparture():
                   passengerList.insert(passengerList.index(currentPassenger), passenger)
                   inserted = True
 
             if not inserted:
               passengerList.append(passenger)
                 
-    print(len(passengerList))
     return passengerList
 
 
@@ -98,6 +97,8 @@ def execute(id, prioritisation_function, passenger_data, cut_off_time):
 
   for i in range(len(prioritised_and_filtered_passengers)):
     prioritised_filtered_list.append(prioritised_and_filtered_passengers[i].departureTime)
+  
+  print('prioritised_filtered_list', prioritised_filtered_list)
 
   return {
     "id": id,
