@@ -55,7 +55,7 @@ def prioritisation_function(passengers, cut_off_time):
       currentTime = passenger.askTimeToDeparture()
       # timeElpased += 1
       # if timeElpased < cut_off_time and timeElpased < currentTime:
-      if currentTime > cut_off_time:
+      if currentTime >= cut_off_time:
         if not passengerList:
           passengerList.append(passenger)
         else:
