@@ -95,6 +95,7 @@ def execute(id, prioritisation_function, passenger_data, cut_off_time):
 
   return {
     "id": id,
-    "sortedDepartureTimes": totalNumberOfRequests,
-    "numberOfRequests": prioritised_filtered_list
+    "sortedDepartureTimes": prioritised_filtered_list,
+    "numberOfRequests": totalNumberOfRequests
+
   }
