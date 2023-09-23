@@ -11,47 +11,47 @@ logger = logging.getLogger(__name__)
 @app.route('/digital-colony', methods=['POST'])
 def solve_digital_colony():
   res_json = request.get_json()
-  sol = calculate_digital_colony(res_json)
 
-  response = jsonify(sol)
+  colony10 = res_json[0]
+  sol = calculate_digital_colony(colony10, colony10["generations"])
+
+  colony50 = res_json[1]
+  sol2 = calculate_digital_colony(colony50, colony50["generations"])
+
+  result = [sol, sol2]
+  response = jsonify(result)
   response.headers['Content-Type'] = 'application/json'
   
   return response
 
-def calculate_digital_colony(input: List[str]) -> List[str]:
-  colony10 = input[0]
-  colony50 = input[1]
+def calculate_digital_colony(input, counter):
   count = 0
-  overall = ""
-  stringNow = colony10['colony']
+  overall10 = ""
+  stringNow = input['colony']
 
-  while count < 10:
-    currentWeight10 = sum(int(char) for char in stringNow)
+  while count < counter:
+    weight = sum(int(char) for char in stringNow)
     temp = ""
 
     for i in range(len(stringNow)-1):
       sliced = stringNow[i:i+2]
-      res = pair_calculate(sliced, currentWeight10)
+      res = pair_calculate(sliced, weight)
       temp = temp + sliced[0] + res
 
       if i == len(stringNow)-2:
         temp = temp + sliced[1]
 
-    # if count <= 4:
-    #   print('count', count)
-    #   print('stringNow:', stringNow)
-    #   print('currentWeight10:', currentWeight10)
-    #   print('temp:', temp)
+    print(count)
 
     stringNow = temp
 
-    if count == 9:
-      overall = temp
-      break
+    if count == counter-1:
+      overall10 = temp
 
     count += 1
 
-  return [str(sum(int(char) for char in overall)), "123"]
+  return str(sum(int(char) for char in overall10))
+
 
 def pair_calculate(inputstr, total):
   first, second = inputstr[0], inputstr[1]
