@@ -56,7 +56,7 @@ def prioritisation_function(passengers, cut_off_time):
         if len(passengerList) == 0:
           passengerList.append(passenger)
         else:
-          if currentTime >= passengerList[-1].askTimeToDeparture():
+          if currentTime > passengerList[-1].askTimeToDeparture():
             passengerList.append(passenger)
           else:
             inserted = False
@@ -64,8 +64,9 @@ def prioritisation_function(passengers, cut_off_time):
             for idx, currentPassenger in enumerate(passengerList):
               if not inserted:
                 if currentTime < currentPassenger.askTimeToDeparture():
-                  passengerList.insert(passengerList.index(currentPassenger), passenger)
+                  passengerList.insert(idx, passenger)
                   inserted = True
+                  break
 
             if not inserted:
               passengerList.append(passenger)
