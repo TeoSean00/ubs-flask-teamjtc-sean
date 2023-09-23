@@ -2,7 +2,7 @@ import json
 import logging
 from typing import Dict, List
 
-from flask import request
+from flask import request, jsonify
 
 from routes import app
 
@@ -13,7 +13,10 @@ logger = logging.getLogger(__name__)
 def solve_airport():
   res_json = request.get_json()
   sol = solve_airport_final(res_json)
-  return json.dumps(sol)
+  response = jsonify(sol)
+  response.headers['Content-Type'] = 'application/json'
+  
+  return response
 
 
 # Simple passenger class
