@@ -37,7 +37,7 @@ def solve_airport_final(in_str_ls: List[str]) -> List[str]:
     id = strList['id']
     timeList = strList['departureTimes']
     cutOff = strList['cutOffTime']
-    res = execute(prioritisation_function, timeList, cutOff)
+    res = execute(id, prioritisation_function, timeList, cutOff)
     result.append(res)
 
   return result
@@ -64,7 +64,7 @@ def prioritisation_function(passengers, cut_off_time):
     return passengerList
 
 
-def execute(prioritisation_function, passenger_data, cut_off_time):
+def execute(id, prioritisation_function, passenger_data, cut_off_time):
   totalNumberOfRequests = 0
   passengers = []
 
@@ -91,6 +91,7 @@ def execute(prioritisation_function, passenger_data, cut_off_time):
   print("\n")
 
   return {
-      "total_number_of_requests": totalNumberOfRequests,
-      "prioritised_filtered_list": prioritised_filtered_list
+    "id": id,
+    "total_number_of_requests": totalNumberOfRequests,
+    "prioritised_filtered_list": prioritised_filtered_list
   }
